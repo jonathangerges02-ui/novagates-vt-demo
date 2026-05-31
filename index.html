@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b0c10" />
+    <meta
+      name="description"
+      content="Novagates Spatial Intelligence — immersive virtual tour viewer"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Novagates Tour Viewer" />
+    <meta property="og:description" content="Photorealistic 360° tour" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://cdn.novagates.app" crossorigin />
+    <title>Tour Viewer · Novagates</title>
+    <script type="module" crossorigin src="./assets/index-5mw_xu2A.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/three-CULia7_u.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-II7IqTKb.css">
+  </head>
+  <body>
+    <main id="viewer-root" aria-label="Tour viewer" role="application">
+      <!-- Canvas mount point — Three.js attaches here. -->
+      <div id="viewer-canvas" data-testid="viewer-canvas"></div>
+
+      <!-- Chrome overlay (compass + controls + loading + capability fallback). -->
+      <div id="viewer-chrome" aria-live="polite">
+        <!-- Loading overlay: shown until READY -->
+        <section
+          id="viewer-loading"
+          class="viewer-overlay"
+          data-testid="viewer-loading"
+          role="status"
+          aria-busy="true"
+          aria-label="Loading tour"
+        >
+          <div class="viewer-loading-bar" aria-hidden="true">
+            <div class="viewer-loading-bar-fill" id="viewer-loading-bar-fill"></div>
+          </div>
+          <p class="viewer-loading-label" id="viewer-loading-label">Loading panorama…</p>
+        </section>
+
+        <!-- Capability-failed overlay: shown when neither WebGPU nor WebGL2 -->
+        <section
+          id="viewer-capability-error"
+          class="viewer-overlay viewer-overlay--error"
+          data-testid="viewer-capability-error"
+          role="alert"
+          hidden
+        >
+          <h1 id="capability-title">This browser cannot render the tour</h1>
+          <p id="capability-body"></p>
+          <ul id="capability-recommendations"></ul>
+        </section>
+
+        <!-- Compass (visible when READY) -->
+        <div
+          id="viewer-compass"
+          class="viewer-chrome viewer-chrome--compass"
+          data-testid="viewer-compass"
+          aria-label="Compass bearing"
+          role="img"
+          hidden
+        >
+          <div class="viewer-compass-needle" id="viewer-compass-needle">
+            <span id="viewer-compass-label">N</span>
+          </div>
+          <span id="viewer-pitch-indicator" class="viewer-pitch-indicator" aria-label="Camera pitch"
+            >0°</span
+          >
+        </div>
+
+        <!-- Current scene name (visible when READY) -->
+        <div
+          id="viewer-scene-title"
+          class="viewer-chrome viewer-chrome--scene-title"
+          data-testid="viewer-scene-title"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <!-- History controls (back / forward) -->
+        <div
+          id="viewer-history"
+          class="viewer-chrome viewer-chrome--history"
+          data-testid="viewer-history"
+          hidden
+        >
+          <button
+            type="button"
+            id="viewer-back-btn"
+            data-testid="viewer-back-btn"
+            aria-label="Previous scene"
+            disabled
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            id="viewer-forward-btn"
+            data-testid="viewer-forward-btn"
+            aria-label="Next scene"
+            disabled
+          >
+            →
+          </button>
+        </div>
+
+        <!-- Controls hint -->
+        <div
+          id="viewer-controls-hint"
+          class="viewer-chrome viewer-chrome--controls"
+          data-testid="viewer-controls-hint"
+          hidden
+        >
+          <button type="button" id="viewer-fullscreen-btn" aria-label="Enter full screen">⛶</button>
+          <button type="button" id="viewer-reset-view-btn" aria-label="Reset camera view">⟲</button>
+          <button
+            type="button"
+            id="viewer-help-btn"
+            aria-haspopup="dialog"
+            aria-controls="viewer-help"
+            aria-label="Keyboard shortcuts"
+          >
+            ?
+          </button>
+        </div>
+
+        <!-- Keyboard help dialog -->
+        <div
+          id="viewer-help"
+          class="viewer-overlay viewer-overlay--help"
+          data-testid="viewer-help"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="viewer-help-title"
+          hidden
+        >
+          <h2 id="viewer-help-title">Keyboard shortcuts</h2>
+          <dl>
+            <dt>← → ↑ ↓</dt>
+            <dd>Pan the camera</dd>
+            <dt>+ / -</dt>
+            <dd>Zoom in / out</dd>
+            <dt>Home / 0</dt>
+            <dd>Reset view</dd>
+            <dt>Tab</dt>
+            <dd>Cycle through points of interest</dd>
+            <dt>Enter</dt>
+            <dd>Activate focused point of interest</dd>
+            <dt>Esc</dt>
+            <dd>Close this dialog</dd>
+            <dt>Page Up / Page Down</dt>
+            <dd>Previous / next scene</dd>
+            <dt>Backspace</dt>
+            <dd>Back to previous scene</dd>
+            <dt>[ / ]</dt>
+            <dd>Cycle scene variants</dd>
+          </dl>
+          <button type="button" id="viewer-help-close" autofocus>Close</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
